@@ -1,4 +1,5 @@
 // requires gcc-9+
+// see https://godbolt.org/z/35cTTj if you have old compiler version
 
 #include <iostream>
 #include <cstring>
