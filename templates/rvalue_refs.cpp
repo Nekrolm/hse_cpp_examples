@@ -1,3 +1,5 @@
+// requires gcc-9+
+
 #include <iostream>
 #include <cstring>
 #include <type_traits>
