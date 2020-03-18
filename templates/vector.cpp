@@ -129,6 +129,7 @@ public:
     void emplace_back(Args&&... args) {
         if (size() < capacity()) {
             AllocTrait::construct(allocator_, space_, std::forward<Args>(args)...);
+	    space_++;
             return;
         }
         base new_base(std::max(static_cast<size_t>(1), capacity() * 2));
