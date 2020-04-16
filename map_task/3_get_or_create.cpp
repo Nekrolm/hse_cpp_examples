@@ -14,12 +14,12 @@
 */
 
 
-template <class Key, class Value /*, ????*/>
+template <class Key, class Value>
 class Map {
 public:
-    Key& get_or_create(const Key& key /*func*/);
-    Key* get(const Key&);
-    const Key* get(const Key&) const;
+    Value& get_or_create(const Key& key /*func*/);
+    Value* get(const Key&);
+    const Value* get(const Key&) const;
 private:
     //???
 };
