@@ -7,6 +7,7 @@
 #include <variant>
 #include <iostream>
 
+
 template <class... F>
 struct OverloadSet : F... {
     using F::operator()...;
@@ -33,22 +34,25 @@ public:
         }), str_storage);
     } 
 
-    MyStringImpl(std::string_view v) {
+    MyStringImpl(std::string_view v) 
+    : str_storage([v]()->Storage{
         if (v.length() < sizeof(std::string)){
             ShortString str;
             std::copy(std::begin(v), std::end(v), str.str);
-            str_storage = str;
+            return str;
         }else{
-            str_storage = std::string(v);
+            return std::string(v);
         }
-    }
+    }()) {}
 
 private:
     struct ShortString {
         char str[sizeof(std::string)] = {};
     };
+
+  using Storage = std::variant<ShortString, std::string>;   
   
-  std::variant<ShortString, std::string> str_storage;
+  Storage str_storage;
 };
 
 MyString::MyString(std::string_view sv) {
@@ -58,3 +62,5 @@ MyString::MyString(std::string_view sv) {
 std::string_view MyString::ToStdString() const {
     return impl_->ToStdString();
 }
+
+MyString::~MyString() = default;

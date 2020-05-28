@@ -11,6 +11,7 @@ public:
     MyString(std::string_view);
 
     MyString(MyString&&) = default;
+    ~MyString();
     MyString& operator = (MyString&&) = default;
     
     std::string_view ToStdString() const;
